@@ -1,0 +1,47 @@
+## Build output
+bin/
+obj/
+out/
+artifacts/
+TestResults/
+
+## IDE settings
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+project.lock.json
+project.fragment.lock.json
+
+## Logs & cache
+*.log
+*.tlog
+*.cache
+*.ide/
+*.pidb
+
+## System
+*.DS_Store
+Thumbs.db
+
+## Env & secrets
+.env
+*.env.*
+appsettings.Development.json
+appsettings.Local.json
+appsettings.json
+
+## Rider (JetBrains)
+.idea/
+*.iml
+
+## Others
+_ReSharper.Caches/
