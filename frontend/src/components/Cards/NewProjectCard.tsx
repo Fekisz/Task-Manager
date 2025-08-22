@@ -8,11 +8,13 @@ import useOnClickOutside from "@/Hooks/onClickOutside";
 interface NewProjectCardProps {
 	showNewProjectCard: boolean;
 	setShowNewProjectCard: (show: boolean) => void;
+	setreloadProject: (value: number) => void;
 }
-
+let i = 1;
 function NewProjectCard({
 	showNewProjectCard,
 	setShowNewProjectCard,
+	setreloadProject,
 }: NewProjectCardProps) {
 	const NewTitle = useRef<HTMLInputElement>(null);
 	const NewDescription = useRef<HTMLInputElement>(null);
@@ -48,8 +50,8 @@ function NewProjectCard({
 								description: NewDescription.current?.value,
 								user_id: 1,
 							})
-							.then((response) => {
-								console.log("Project created:", response);
+							.then(() => {
+								setreloadProject(i++);
 							});
 					}}
 				>

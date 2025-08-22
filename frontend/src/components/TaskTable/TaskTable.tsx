@@ -82,8 +82,9 @@ function TaskTable({
 										});
 								}}
 							>
-								<div id={`${task.description}`} className=" text-[18px]  ">
-									{task.title}
+								<div id={`${task.description}`} className=" text-[18px]   ">
+									{task.title.slice(0, 25) +
+										(task.title.length > 25 ? "..." : "")}
 								</div>
 								<Button
 									onClick={() => {
@@ -95,7 +96,7 @@ function TaskTable({
 									}}
 									className="bg-red-500 h-2 w-0 p-2.5 flex  items-center justify-center text-white rounded-full"
 								>
-									D
+									X
 								</Button>
 							</div>
 						))

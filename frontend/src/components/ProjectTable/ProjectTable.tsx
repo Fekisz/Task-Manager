@@ -29,8 +29,15 @@ interface Project {
 	description?: string;
 	user_id?: number;
 }
+interface ProjectTableProps extends SetProject_id {
+	reloadProject: number;
+}
 
-function ProjectTable({ OnSetProject_id, project_id }: SetProject_id) {
+function ProjectTable({
+	OnSetProject_id,
+	project_id,
+	reloadProject,
+}: ProjectTableProps) {
 	const [projects, SetProjects] = useState<Project[]>([]);
 
 	useEffect(() => {
@@ -39,7 +46,7 @@ function ProjectTable({ OnSetProject_id, project_id }: SetProject_id) {
 			.catch((error) => {
 				console.error("Error fetching projects:", error);
 			});
-	}, []);
+	}, [reloadProject]);
 
 	return (
 		<ScrollArea className="w-[350px] h-[400px] rounded-2xl bg-gray-800 text-white overflow-hidden">
@@ -50,7 +57,7 @@ function ProjectTable({ OnSetProject_id, project_id }: SetProject_id) {
 					<Button
 						onClick={() => OnSetProject_id(project.id)}
 						className={
-							"bg-gray-600 rounded-2xl p-2 text-[18px] hover:cursor-pointer w-10/12 justify-between mb-3 " +
+							"bg-gray-600 rounded-2xl p-2 text-[18px] hover:cursor-pointer w-10/12 justify-between mb-3 text-wrap " +
 							(project_id === project.id ? "bg-blue-500" : "")
 						}
 						key={`Project_${project.id}`}
@@ -66,7 +73,7 @@ function ProjectTable({ OnSetProject_id, project_id }: SetProject_id) {
 							}}
 							className="bg-red-500 h-2 w-0 p-2.5 flex  items-center justify-center text-white rounded-full"
 						>
-							D
+							X
 						</Button>
 					</Button>
 				))}

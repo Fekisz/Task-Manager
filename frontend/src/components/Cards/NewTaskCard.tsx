@@ -13,7 +13,7 @@ interface NewTaskCardProps extends ProjectID {
 	setShowNewTaskCard: (show: boolean) => void;
 	reloadTasks: (value: number) => void;
 }
-
+let i = 1;
 function NewTaskCard({
 	showNewTaskCard,
 	setShowNewTaskCard,
@@ -49,13 +49,16 @@ function NewTaskCard({
 					onClick={() => {
 						setShowNewTaskCard(false);
 
-						api.post("Task", {
-							Title: NewTitle.current?.value,
-							Description: NewDescription.current?.value,
-							State: false,
-							project_id: project_id,
-						});
-						reloadTasks(1);
+						api
+							.post("Task", {
+								Title: NewTitle.current?.value,
+								Description: NewDescription.current?.value,
+								State: false,
+								project_id: project_id,
+							})
+							.then(() => {
+								reloadTasks(i++);
+							});
 					}}
 				>
 					Add New Task

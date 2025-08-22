@@ -10,12 +10,14 @@ function App() {
 	const [showNewProjectCard, setShowNewProjectCard] = useState(false);
 	const [showNewTaskCard, setShowNewTaskCard] = useState(false);
 	const [reloadTasks, setReloadTasks] = useState(0);
+	const [reloadProject, setreloadProject] = useState(0);
 
 	return (
 		<div className={"h-full w-full bg-gray-900 absolute "}>
 			<NewProjectCard
 				showNewProjectCard={showNewProjectCard}
 				setShowNewProjectCard={setShowNewProjectCard}
+				setreloadProject={setreloadProject}
 			/>
 			<NewTaskCard
 				showNewTaskCard={showNewTaskCard}
@@ -31,6 +33,7 @@ function App() {
 					<ProjectTable
 						OnSetProject_id={SetProject_id}
 						project_id={Project_id}
+						reloadProject={reloadProject}
 					/>
 					<TaskTable
 						project_id={Project_id}
