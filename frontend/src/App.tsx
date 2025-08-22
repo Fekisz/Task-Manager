@@ -9,6 +9,7 @@ function App() {
 	const [Project_id, SetProject_id] = useState<number | null>(null);
 	const [showNewProjectCard, setShowNewProjectCard] = useState(false);
 	const [showNewTaskCard, setShowNewTaskCard] = useState(false);
+	const [reloadTasks, setReloadTasks] = useState(0);
 
 	return (
 		<div className={"h-full w-full bg-gray-900 absolute "}>
@@ -20,6 +21,7 @@ function App() {
 				showNewTaskCard={showNewTaskCard}
 				setShowNewTaskCard={setShowNewTaskCard}
 				project_id={Project_id}
+				reloadTasks={setReloadTasks}
 			/>
 			<div className="h-1/2 w-3/4 ml-auto mr-auto flex flex-col  mt-15">
 				<div className="">
@@ -33,6 +35,7 @@ function App() {
 					<TaskTable
 						project_id={Project_id}
 						setShowNewTaskCard={setShowNewTaskCard}
+						reloadTasks={reloadTasks}
 					/>
 				</div>
 			</div>

@@ -5,19 +5,21 @@ import { api } from "@/lib/api";
 import { useRef } from "react";
 import useOnClickOutside from "@/Hooks/onClickOutside";
 
-interface NewTaskCardProps {
-	showNewTaskCard: boolean;
-	setShowNewTaskCard: (show: boolean) => void;
-}
 interface ProjectID {
 	project_id: number | null;
+}
+interface NewTaskCardProps extends ProjectID {
+	showNewTaskCard: boolean;
+	setShowNewTaskCard: (show: boolean) => void;
+	reloadTasks: (value: number) => void;
 }
 
 function NewTaskCard({
 	showNewTaskCard,
 	setShowNewTaskCard,
 	project_id,
-}: NewTaskCardProps & ProjectID) {
+	reloadTasks,
+}: NewTaskCardProps) {
 	const NewTitle = useRef<HTMLInputElement>(null);
 	const NewDescription = useRef<HTMLInputElement>(null);
 	const cardRef = useRef<HTMLDivElement>(
@@ -53,6 +55,7 @@ function NewTaskCard({
 							State: false,
 							project_id: project_id,
 						});
+						reloadTasks(1);
 					}}
 				>
 					Add New Task

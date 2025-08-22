@@ -32,25 +32,31 @@ interface ProjectID {
 interface setShowNewTaskCard {
 	setShowNewTaskCard: (show: boolean) => void;
 }
+interface TaskTableProps extends ProjectID, setShowNewTaskCard {
+	reloadTasks: number;
+}
 
 function TaskTable({
 	project_id,
-
 	setShowNewTaskCard,
-}: ProjectID & setShowNewTaskCard) {
+	reloadTasks,
+}: TaskTableProps) {
 	const [tasks, SetTasks] = useState([]);
+
+	const reloadTask = () => {
+		if (project_id) {
+			fetchTask(project_id).then(SetTasks);
+		}
+	};
 
 	useEffect(() => {
 		if (!project_id || project_id === null) {
 			SetTasks([]);
 			return;
 		}
-		fetchTask(project_id != null ? project_id : undefined)
-			.then(SetTasks)
-			.catch((error) => {
-				console.error("Error fetching Tasks:", error);
-			});
-	}, [project_id]);
+		reloadTask();
+	}, [project_id, reloadTasks]);
+
 	tasks.sort((a: Task, b: Task) => a.id - b.id);
 	return (
 		<div className="p-4 w-">
