@@ -1,15 +1,21 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY *.sln .
-COPY *.csproj MyApi/
-RUN dotnet restore
 
-COPY  . .
-RUN dotnet publish -c Release -o /app
+COPY TaskManagerApi.csproj ./
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+
+RUN dotnet restore TaskManagerApi.csproj
+
+
+COPY . .
+
+
+RUN dotnet publish TaskManagerApi.csproj -c Release -o /app
+
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app .
 EXPOSE 5000
-ENTRYPOINT ["dotnet", "backend.dll"]
+ENTRYPOINT ["dotnet", "TaskManagerApi.dll"]

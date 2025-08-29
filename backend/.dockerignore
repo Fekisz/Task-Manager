@@ -37,7 +37,7 @@ Thumbs.db
 *.env.*
 appsettings.Development.json
 appsettings.Local.json
-appsettings.json
+# appsettings.json
 
 ## Rider (JetBrains)
 .idea/
