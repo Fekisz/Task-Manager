@@ -1,0 +1,31 @@
+services:
+  web:
+    build: ./frontend
+    container_name: frontend_nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+  api:
+    build: ./backend
+    container_name: dognet_api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: dognet_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: task_manager
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./DB/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+volumes:
+  db_data:
