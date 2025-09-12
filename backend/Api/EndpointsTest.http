@@ -5,7 +5,7 @@ GET http://localhost:5034/api/Project/
 GET http://localhost:5034/api/Task/1
 
 ### Create a new project
-POST http://localhost:5034/api/Project
+POST http://localhost:5000/api/Project
 Content-Type: application/json
 
 {

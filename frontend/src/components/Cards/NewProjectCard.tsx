@@ -37,7 +37,7 @@ function NewProjectCard({
 				<h2 className="text-2xl font-semibold">Create New Project</h2>
 			</CardHeader>
 			<CardContent>
-				<Input ref={NewTitle} placeholder="Title"></Input>
+				<Input ref={NewTitle} placeholder="Titl"></Input>
 				<Input ref={NewDescription} placeholder="Description"></Input>
 				<Button
 					className="mt-4 w-full bg-blue-500 hover:bg-blue-600 hover:cursor-pointer"
