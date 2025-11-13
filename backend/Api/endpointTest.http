@@ -1,0 +1,43 @@
+### Get all projects
+GET  http://localhost:8080/Project
+
+### Get project by ID
+GET  http://localhost:8080/Project/13
+### Get 1 Task by ID
+
+GET  http://localhost:8080/Task/14
+
+### Create a new project
+POST http://localhost:5000/api/Project
+Content-Type: application/json
+
+{
+  
+  "name": "Test Project",
+  "description": "This is an example project.",
+  "user_id": 1
+}
+
+### Create a new project
+POST http://localhost:5034/api/Task
+Content-Type: application/json
+
+{
+  "title":"sda",
+	"description": "NewDescript",
+	"State": false,
+	"project_id": 1
+}
+
+### Create a new project
+PATCH  http://localhost:5034/api/Task/1
+Content-Type: application/json
+
+{
+	"State": true
+}
+###
+
+DELETE  http://localhost:5034/api/Task/1
+###
+DELETE  http://localhost:5034/api/Project/1

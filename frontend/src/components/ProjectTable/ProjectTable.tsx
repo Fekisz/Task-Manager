@@ -11,7 +11,8 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 
 async function fetchProjects(id?: number) {
-	const response = await api.get(`Project/${id ? { id } : ""}`);
+	const endpoint = id ? `Project/${id}` : "Project";
+	const response = await api.get(endpoint);
 	if (response) {
 		return response.data;
 	} else {
@@ -67,7 +68,11 @@ function ProjectTable({
 							onClick={() => {
 								api.delete(`Project/${project.id}`).then(() => {
 									if (project_id) {
-										fetchProjects().then(SetProjects);
+										fetchProjects()
+											.then(SetProjects)
+											.then(() => {
+												OnSetProject_id(0);
+											});
 									}
 								});
 							}}

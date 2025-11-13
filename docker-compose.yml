@@ -9,23 +9,26 @@ services:
 
   api:
     build: ./backend
-    container_name: dognet_api
     ports:
-      - "5000:5000"
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/task_manager?sslmode=disable
     depends_on:
       - db
 
   db:
-    image: postgres:latest
+    image: postgres:18
     container_name: dognet_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: task_manager
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./DB/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+
 volumes:
   db_data:

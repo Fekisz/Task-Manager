@@ -1,13 +1,14 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-WORKDIR /src
-COPY Api/Api.csproj Api/
-RUN dotnet restore Api/Api.csproj
-COPY . .
-WORKDIR /src/Api
-RUN dotnet publish -c Release -o /publish
+FROM golang:1.25-alpine
 
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
-COPY --from=build /publish .
-EXPOSE 5000
-ENTRYPOINT ["dotnet", "Api.dll"]
+
+COPY Api/go.mod Api/go.sum ./
+RUN go mod download
+
+COPY Api/ .
+
+RUN go build -o backend .
+
+EXPOSE 8080
+
+CMD ["./backend"]

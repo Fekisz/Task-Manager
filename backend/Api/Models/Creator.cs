@@ -1,9 +1,0 @@
-namespace Models;
-public class User
-{
-    public int Id { get; set; }
-    public required string Email { get; set; }
-    public required string Password { get; set; }
-    public DateOnly Date_of_registration { get; set; }
-}
-
