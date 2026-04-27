@@ -15,7 +15,7 @@ Content-Type: application/json
   
   "name": "Test Project",
   "description": "This is an example project.",
-  "user_id": 1
+ 
 }
 
 ### Create a new project

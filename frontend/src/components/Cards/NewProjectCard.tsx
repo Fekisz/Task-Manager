@@ -19,7 +19,7 @@ function NewProjectCard({
 	const NewTitle = useRef<HTMLInputElement>(null);
 	const NewDescription = useRef<HTMLInputElement>(null);
 	const cardRef = useRef<HTMLDivElement>(
-		null
+		null,
 	) as React.RefObject<HTMLDivElement>;
 
 	useOnClickOutside(cardRef, () => {
@@ -48,7 +48,6 @@ function NewProjectCard({
 							.post("Project", {
 								name: NewTitle.current?.value,
 								description: NewDescription.current?.value,
-								user_id: 1,
 							})
 							.then(() => {
 								setreloadProject(i++);

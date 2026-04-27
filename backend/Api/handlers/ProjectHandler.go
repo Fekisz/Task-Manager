@@ -16,7 +16,7 @@ func ProjectHandler(w http.ResponseWriter, r *http.Request) {
 	var Projects []models.Project
 
 	err := openWithDB(func(db *sql.DB) error {
-		rows, err := db.Query("SELECT id, name, description, user_id FROM projects where user_id=1")
+		rows, err := db.Query("SELECT id, name, description FROM projects")
 		if err != nil {
 			return err
 		}
@@ -27,7 +27,7 @@ func ProjectHandler(w http.ResponseWriter, r *http.Request) {
 }
 		for rows.Next() {
 			var Project models.Project
-			if err := rows.Scan(&Project.ID,&Project.Name, &Project.Description, &Project.Userid); err != nil {
+			if err := rows.Scan(&Project.ID,&Project.Name, &Project.Description); err != nil {
 				return err
 			}
 			Projects = append(Projects, Project)
@@ -52,7 +52,7 @@ func ProjectHandlerById(w http.ResponseWriter, r *http.Request, id int) {
 	var Projects []models.Project
 
 	err := openWithDB(func(db *sql.DB) error {
-		rows, err := db.Query("SELECT id, name, description, user_id FROM projects where user_id=1 AND id="+ fmt.Sprint(id))
+		rows, err := db.Query("SELECT id, name, description FROM projects where id="+ fmt.Sprint(id))
 		if err != nil {
 			return err
 		}
@@ -60,7 +60,7 @@ func ProjectHandlerById(w http.ResponseWriter, r *http.Request, id int) {
 
 		for rows.Next() {
 			var Project models.Project
-			if err := rows.Scan(&Project.ID, &Project.Name,&Project.Description, &Project.Userid); err != nil {
+			if err := rows.Scan(&Project.ID, &Project.Name,&Project.Description); err != nil {
 				return err
 			}
 			Projects = append(Projects, Project)
@@ -107,7 +107,7 @@ func ProjectCreate(w http.ResponseWriter, r *http.Request) {
 			
 
 	err := openWithDB(func(db *sql.DB) error {
-		 db.Exec("INSERT INTO projects (name, description, user_id) VALUES ('"+content.Name+"', '"+content.Description+"', 1);")
+		 db.Exec("INSERT INTO projects (name, description) VALUES ('"+content.Name+"', '"+content.Description+"', 1);")
 	
 		return nil
 	})
